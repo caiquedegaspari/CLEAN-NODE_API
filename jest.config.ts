@@ -7,5 +7,6 @@ export default {
   testEnvironment: 'jest-environment-node',
   transform: {
     '.+\\.ts$': 'ts-jest'
-  }
+  },
+  moduleDirectories: ['node_modules', 'src']
 }

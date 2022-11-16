@@ -5,6 +5,7 @@
     "target": "es2021",
     "esModuleInterop": true,
     "allowJs": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./src"
   }
 }
