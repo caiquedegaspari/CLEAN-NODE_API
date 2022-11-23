@@ -1,7 +1,6 @@
 import { InvalidParamError, MissingParamError } from 'presentation/errors'
 import { badRequest, serverError } from 'presentation/helpers'
-import { EmailValidator, HttpRequest, HttpResponse } from 'presentation/protocols'
-import { Controller } from './controller'
+import { EmailValidator, HttpRequest, HttpResponse, Controller } from 'presentation/protocols'
 
 export class SignUpController implements Controller {
   constructor (private readonly emailValidator: EmailValidator) {}
