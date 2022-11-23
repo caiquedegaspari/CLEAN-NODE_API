@@ -22,7 +22,8 @@ export class SignUpController implements Controller {
         password
       })
       return ok(account)
-    } catch {
+    } catch (error) {
+      console.error(error)
       return serverError()
     }
   }
