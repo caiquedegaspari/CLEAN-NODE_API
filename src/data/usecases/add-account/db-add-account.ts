@@ -1,5 +1,4 @@
-import { Encrypter } from 'data/protocols'
-import { AccountModel, AddAccount, AddAccountModel } from '../../../domain'
+import { Encrypter, AccountModel, AddAccount, AddAccountModel } from './db-add-account-protocols'
 
 export class DbAddAccount implements AddAccount {
   constructor (private readonly encrypter: Encrypter) {}
