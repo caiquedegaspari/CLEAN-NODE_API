@@ -8,5 +8,6 @@ module.exports = {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
-  moduleDirectories: ['node_modules', 'src']
+  moduleDirectories: ['node_modules', 'src'],
+  preset: '@shelf/jest.mongodb'
 }
