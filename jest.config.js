@@ -9,5 +9,5 @@ module.exports = {
     '.+\\.ts$': 'ts-jest'
   },
   moduleDirectories: ['node_modules', 'src'],
-  preset: '@shelf/jest.mongodb'
+  preset: '@shelf/jest-mongodb'
 }
