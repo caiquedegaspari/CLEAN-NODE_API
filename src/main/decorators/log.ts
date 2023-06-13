@@ -9,7 +9,7 @@ export class LogControllerDecorator implements Controller {
     //  // log
     // }
     // return httpResponse
-    await this.controller.handle(httpRequest)
-    return await Promise.resolve({ body: {}, statusCode: 200 })
+    const httpResponse = await this.controller.handle(httpRequest)
+    return httpResponse
   }
 }
