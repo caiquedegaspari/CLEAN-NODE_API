@@ -1,5 +1,5 @@
-import { InvalidParamError, MissingParamError } from 'presentation/errors'
-import { badRequest, serverError, ok } from 'presentation/helpers'
+import { InvalidParamError, MissingParamError } from '../../../presentation/errors'
+import { badRequest, serverError, ok } from '../../../presentation/helpers'
 import { EmailValidator, HttpRequest, HttpResponse, Controller, AddAccount } from './signup-protocols'
 
 export class SignUpController implements Controller {
@@ -23,8 +23,7 @@ export class SignUpController implements Controller {
       })
       return ok(account)
     } catch (error) {
-      console.error(error)
-      return serverError()
+      return serverError(error as Error)
     }
   }
 }
