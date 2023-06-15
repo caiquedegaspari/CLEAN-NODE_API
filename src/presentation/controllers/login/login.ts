@@ -1,6 +1,6 @@
 import { badRequest } from 'presentation/helpers'
 import { Controller, HttpRequest, HttpResponse } from '../../protocols'
-import { MissingParamError } from 'presentation/errors'
+import { InvalidParamError, MissingParamError } from 'presentation/errors'
 import { EmailValidator } from '../signup/signup-protocols'
 
 export class LoginController implements Controller {
@@ -9,7 +9,8 @@ export class LoginController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     if (!httpRequest.body.email) return badRequest(new MissingParamError('email'))
     if (!httpRequest.body.password) return badRequest(new MissingParamError('password'))
-    this.emailValidator.isValid(httpRequest.body.email)
+    const isValid = this.emailValidator.isValid(httpRequest.body.email)
+    if (!isValid) return badRequest(new InvalidParamError('email'))
     return { body: {}, statusCode: 200 }
   }
 }
