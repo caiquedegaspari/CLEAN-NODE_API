@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "dist",
     "module": "commonjs",
     "target": "es2021",
     "esModuleInterop": true,
-    "allowJs": true,
     "strict": true,
-    "baseUrl": "./src"
-  }
+    "baseUrl": "./src",
+    "sourceMap": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }
