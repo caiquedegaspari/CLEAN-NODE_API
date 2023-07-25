@@ -6,6 +6,11 @@
     "esModuleInterop": true,
     "strict": true,
     "baseUrl": "./src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    },
     "sourceMap": true,
     "rootDir": "src"
   },
