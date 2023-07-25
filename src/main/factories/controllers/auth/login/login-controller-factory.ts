@@ -1,4 +1,4 @@
-import { makeLogControllerDecorator } from 'main/factories/decorators/log-controller-decorator-factory'
+import { makeLogControllerDecorator } from '../../../../factories/decorators/log-controller-decorator-factory'
 import { LoginController } from '../../../../../presentation/controllers/auth/login/login-controller'
 import { Controller } from '../../../../../presentation/protocols'
 import { makeLoginValidation } from './login-validation-factory'
