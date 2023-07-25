@@ -41,36 +41,45 @@ describe('Survey routes', () => {
         })
         .expect(403)
     })
-  })
-  it('Should return 204 on add survey with valid access token ', async () => {
-    const res = await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password',
-      role: 'admin'
-    })
-    const id = res.ops[0]._id
-    const accessToken = sign({ id }, env.jwtSecret)
 
-    await accountCollection.updateOne({ _id: id }, {
-      $set: { accessToken }
-    })
-
-    await request(app)
-      .post('/api/surveys')
-      .set('x-access-token', accessToken)
-      .send({
-        question: 'Question',
-        answers: [
-          {
-            answer: 'answer 1',
-            image: 'http://image_name.com'
-          },
-          {
-            answer: 'answer 2'
-          }
-        ]
+    it('Should return 204 on add survey with valid access token ', async () => {
+      const res = await accountCollection.insertOne({
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        role: 'admin'
       })
-      .expect(204)
+      const id = res.ops[0]._id
+      const accessToken = sign({ id }, env.jwtSecret)
+
+      await accountCollection.updateOne({ _id: id }, {
+        $set: { accessToken }
+      })
+
+      await request(app)
+        .post('/api/surveys')
+        .set('x-access-token', accessToken)
+        .send({
+          question: 'Question',
+          answers: [
+            {
+              answer: 'answer 1',
+              image: 'http://image_name.com'
+            },
+            {
+              answer: 'answer 2'
+            }
+          ]
+        })
+        .expect(204)
+    })
+  })
+
+  describe('GET /surveys', () => {
+    it('Should return 403 on load surveys without access token ', async () => {
+      await request(app)
+        .get('/api/surveys')
+        .expect(403)
+    })
   })
 })
