@@ -1,4 +1,4 @@
-export * from '../../presentation/protocols/validation'
+export * from '@/presentation/protocols/validation'
 export * from './compare-fields-validation'
 export * from './email-validation'
 export * from './required-field-validation'
