@@ -8,6 +8,7 @@
     "eslint-disable-next-line import/no-duplicates": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "n/no-path-concat": "off",
-    "@typescript-eslint/consistent-type-definitions": "off"
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/restrict-template-expressions": "off"
   }
 }
