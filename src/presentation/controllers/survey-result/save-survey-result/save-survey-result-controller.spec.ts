@@ -1,7 +1,7 @@
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { forbidden, ok, serverError } from '@/presentation/helpers'
 import { InvalidParamError } from '@/presentation/errors'
-import { HttpRequest, SurveyResultModel, SurveyModel, LoadSurveyById, SaveSurveyResult, SaveSurveyResultModel } from './save-survey-result-controller-protocols'
+import { HttpRequest, SurveyResultModel, SurveyModel, LoadSurveyById, SaveSurveyResult, SaveSurveyResultParams } from './save-survey-result-controller-protocols'
 import MockDate from 'mockdate'
 
 type SutTypes = {
@@ -40,7 +40,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeSaveSurveyResult = (): SaveSurveyResult => {
   class SaveSurveyResultStub implements SaveSurveyResult {
-    async save (data: SaveSurveyResultModel): Promise<SurveyResultModel | null> {
+    async save (data: SaveSurveyResultParams): Promise<SurveyResultModel | null> {
       return await Promise.resolve(makeFakeSurveyResult())
     }
   }
