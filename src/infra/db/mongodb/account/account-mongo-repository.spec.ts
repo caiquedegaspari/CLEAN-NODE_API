@@ -1,6 +1,7 @@
 import { Collection } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository'
+import { mockFakeAccountParams } from '@/domain/test'
 
 let accountCollection: Collection
 
@@ -26,11 +27,7 @@ describe('Account Mongo repository', () => {
   describe('add()', () => {
     it('Should return an account on add success', async () => {
       const sut = makeSut()
-      const account = await sut.add({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password'
-      })
+      const account = await sut.add(mockFakeAccountParams())
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
@@ -42,11 +39,7 @@ describe('Account Mongo repository', () => {
   describe('loadByEmail()', () => {
     it('Should return an account on loadByEmail success', async () => {
       const sut = makeSut()
-      await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password'
-      })
+      await accountCollection.insertOne(mockFakeAccountParams())
       const account = await sut.loadByEmail('any_email@mail.com')
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
@@ -65,11 +58,7 @@ describe('Account Mongo repository', () => {
   describe('loadByupdateAccessTokenToken()', () => {
     it('Should update the account access token on updateAccessToken success', async () => {
       const sut = makeSut()
-      const res = await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password'
-      })
+      const res = await accountCollection.insertOne(mockFakeAccountParams())
       const fakeAccount = res.ops[0]
       expect(fakeAccount.accessToken).toBeFalsy()
       await sut.updateAccessToken(fakeAccount._id, 'any_token')
@@ -83,9 +72,7 @@ describe('Account Mongo repository', () => {
     it('Should return an account on loadByToken without role success', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password',
+        ...mockFakeAccountParams(),
         accessToken: 'any_token'
       })
       const account = await sut.loadByToken('any_token')
@@ -98,9 +85,7 @@ describe('Account Mongo repository', () => {
     it('Should return an account on loadByToken with admin role', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password',
+        ...mockFakeAccountParams(),
         accessToken: 'any_token',
         role: 'admin'
       })
@@ -114,9 +99,7 @@ describe('Account Mongo repository', () => {
     it('Should return an account on loadByToken if user is admin role', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password',
+        ...mockFakeAccountParams(),
         accessToken: 'any_token',
         role: 'admin'
       })
@@ -130,9 +113,7 @@ describe('Account Mongo repository', () => {
     it('Should return null on loadByToken with invalid role', async () => {
       const sut = makeSut()
       await accountCollection.insertOne({
-        name: 'any_name',
-        email: 'any_email@mail.com',
-        password: 'any_password',
+        ...mockFakeAccountParams(),
         accessToken: 'any_token'
       })
       const account = await sut.loadByToken('any_token', 'admin')
