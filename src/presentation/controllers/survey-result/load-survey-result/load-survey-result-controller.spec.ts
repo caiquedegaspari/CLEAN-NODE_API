@@ -1,3 +1,4 @@
+import { mockSurveyResultModel } from '@/domain/test/mock-survey-result'
 import { LoadSurveyById } from '../save-survey-result/save-survey-result-controller-protocols'
 import {
   HttpRequest,
@@ -7,6 +8,7 @@ import {
   forbidden,
   mockLoadSurveyById,
   mockLoadSurveyResult,
+  ok,
   serverError,
   throwError
 } from './load-survey-result-controller-protocols'
@@ -65,5 +67,10 @@ describe('LoadSurveyResultController', () => {
     jest.spyOn(loadSurveyResultStub, 'load').mockReturnValueOnce(throwError())
     const res = await sut.handle(makeFakeRequest())
     expect(res).toEqual(serverError(new Error()))
+  })
+  it('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const res = await sut.handle(makeFakeRequest())
+    expect(res).toEqual(ok(mockSurveyResultModel()))
   })
 })
