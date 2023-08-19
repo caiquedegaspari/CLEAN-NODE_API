@@ -6,7 +6,8 @@ import {
   HttpResponse,
   LoadSurveyResult,
   LoadSurveyById,
-  InvalidParamError
+  InvalidParamError,
+  ok
 } from './load-survey-result-controller-protocols'
 
 export class LoadSurveyResultController implements Controller {
@@ -20,11 +21,8 @@ export class LoadSurveyResultController implements Controller {
       const { surveyId } = httpRequest.params
       const survey = await this.loadSurveyById.loadById(surveyId)
       if (!survey) return forbidden(new InvalidParamError('surveyId'))
-      await this.loadSurveyResult.load(surveyId)
-      return await Promise.resolve({
-        body: {},
-        statusCode: 200
-      })
+      const surveyResult = await this.loadSurveyResult.load(surveyId)
+      return ok(surveyResult)
     } catch (err) {
       return serverError(err as Error)
     }
