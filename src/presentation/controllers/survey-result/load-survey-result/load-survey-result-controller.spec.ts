@@ -60,4 +60,10 @@ describe('LoadSurveyResultController', () => {
     await sut.handle(makeFakeRequest())
     expect(loadSurveyByIdSpy).toHaveBeenCalledWith(makeFakeRequest().params.surveyId)
   })
+  it('Should return 500 if LoadSurveyResult throws', async () => {
+    const { sut, loadSurveyResultStub } = makeSut()
+    jest.spyOn(loadSurveyResultStub, 'load').mockReturnValueOnce(throwError())
+    const res = await sut.handle(makeFakeRequest())
+    expect(res).toEqual(serverError(new Error()))
+  })
 })
