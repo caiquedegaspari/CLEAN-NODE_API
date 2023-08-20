@@ -16,8 +16,9 @@ import MockDate from 'mockdate'
 
 const mockFakeRequest = (): HttpRequest => ({
   params: {
-    surveyId: 'any_id'
-  }
+    surveyId: 'any_survey_id'
+  },
+  accountId: 'any_id'
 })
 
 type SutTypes = {
@@ -64,11 +65,12 @@ describe('LoadSurveyResultController', () => {
     const res = await sut.handle(mockFakeRequest())
     expect(res).toEqual(serverError(new Error()))
   })
-  it('Should call loadSurveyResult with correct value', async () => {
+  it('Should call loadSurveyResult with correct values', async () => {
     const { sut, loadSurveyResultStub } = makeSut()
     const loadSurveyByIdSpy = jest.spyOn(loadSurveyResultStub, 'load')
-    await sut.handle(mockFakeRequest())
-    expect(loadSurveyByIdSpy).toHaveBeenCalledWith(mockFakeRequest().params.surveyId)
+    const request = mockFakeRequest()
+    await sut.handle(request)
+    expect(loadSurveyByIdSpy).toHaveBeenCalledWith(request.params.surveyId, request.accountId)
   })
   it('Should return 500 if LoadSurveyResult throws', async () => {
     const { sut, loadSurveyResultStub } = makeSut()

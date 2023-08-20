@@ -8,12 +8,14 @@ export const mockSurveyResultModel = (): SurveyResultModel => ({
     answer: 'any_answer',
     image: 'any_image',
     count: 0,
-    percent: 0
+    percent: 0,
+    isCurrentAccountAnswer: false
   }, {
     answer: 'other_answer',
     count: 0,
     percent: 0,
-    image: 'any_image'
+    image: 'any_image',
+    isCurrentAccountAnswer: false
   }],
   date: new Date()
 })

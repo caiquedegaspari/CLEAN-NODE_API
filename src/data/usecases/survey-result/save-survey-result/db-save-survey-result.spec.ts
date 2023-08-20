@@ -50,7 +50,7 @@ describe('DbSaveSurveyResult UseCase', () => {
     const loadSurveyResultSpy = jest.spyOn(loadSurveyResultRepositoryStub, 'loadBySurveyId')
     const surveyResultData = mockSaveSurveyResultParams()
     await sut.save(surveyResultData)
-    expect(loadSurveyResultSpy).toHaveBeenCalledWith(surveyResultData.surveyId)
+    expect(loadSurveyResultSpy).toHaveBeenCalledWith(surveyResultData.surveyId, surveyResultData.accountId)
   })
 
   it('Should throw if LoadSurveyResultRepository throws', async () => {

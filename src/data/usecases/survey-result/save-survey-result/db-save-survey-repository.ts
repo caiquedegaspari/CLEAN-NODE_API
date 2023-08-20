@@ -9,7 +9,7 @@ export class DbSaveSurveyResult implements SaveSurveyResult {
 
   async save (data: SaveSurveyResultParams): Promise<SurveyResultModel | null> {
     await this.saveSurveyResultRepository.save(data)
-    const surveyResult = await this.loadSurveyResult.loadBySurveyId(data.surveyId)
+    const surveyResult = await this.loadSurveyResult.loadBySurveyId(data.surveyId, data.accountId)
     return surveyResult
   };
 }
