@@ -4,6 +4,7 @@ import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '../config/env'
+import MockDate from 'mockdate'
 
 let surveyCollection: Collection
 let accountCollection: Collection
@@ -25,11 +26,13 @@ const makeAccessToken = async (): Promise<string> => {
 
 describe('Survey routes', () => {
   beforeAll(async () => {
+    MockDate.set(new Date())
     if (!process.env.MONGO_URL) throw new Error()
     await MongoHelper.connect(process.env.MONGO_URL)
   })
 
   afterAll(async () => {
+    MockDate.reset()
     await MongoHelper.disconnect()
   })
 
