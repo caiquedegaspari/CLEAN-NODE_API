@@ -36,7 +36,7 @@ export const mockFakeSurveys = (): SurveyModel[] => [
 ]
 
 export const mockAddSurveyParams = (): AddSurveyParams => ({
-  question: 'anyQuestion',
+  question: 'any_question',
   answers: [{
     image: 'any_image',
     answer: 'any_answer'
