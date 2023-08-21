@@ -2,12 +2,10 @@ import { throwError } from '@/domain/test/throw-error'
 import { AccessDeniedError } from '../errors'
 import { forbidden, ok, serverError } from '../helpers'
 import { AuthMiddleware } from './auth-middleware'
-import { LoadAccountByToken, HttpRequest } from './auth-middleware-protocols'
+import { LoadAccountByToken } from './auth-middleware-protocols'
 import { mockLoadAccountByToken } from '../test'
-const mockFakeRequest = (): HttpRequest => ({
-  headers: {
-    'x-access-token': 'any_token'
-  }
+const mockFakeRequest = (): AuthMiddleware.Request => ({
+  accessToken: 'any_token'
 })
 
 type SutTypes = {

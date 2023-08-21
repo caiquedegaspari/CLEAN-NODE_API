@@ -1,4 +1,4 @@
-import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
+import { Controller, HttpResponse } from '@/presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { ok, serverError } from '@/presentation/helpers'
 import { LogErrorRepository } from '@/data/protocols/db/log/log-error-repository'
@@ -7,7 +7,7 @@ import { mockLogErrorRepository } from '@/data/test'
 
 const makeController = (): Controller => {
   class ControllerStub {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle (httpRequest: any): Promise<HttpResponse> {
       return await Promise.resolve(ok(mockFakeAccountModel()))
     }
   }
@@ -15,7 +15,7 @@ const makeController = (): Controller => {
   return new ControllerStub()
 }
 
-const mockFakeRequest = (): HttpRequest => ({
+const mockFakeRequest = (): any => ({
   body: {
     name: 'any name',
     email: 'any_email@email.com',

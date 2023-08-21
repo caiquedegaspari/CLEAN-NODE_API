@@ -1,7 +1,7 @@
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import { forbidden, ok, serverError } from '@/presentation/helpers'
 import { InvalidParamError } from '@/presentation/errors'
-import { HttpRequest, LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
+import { LoadSurveyById, SaveSurveyResult } from './save-survey-result-controller-protocols'
 import MockDate from 'mockdate'
 import { throwError } from '@/domain/test/throw-error'
 import { mockSurveyResultModel } from '@/domain/test/mock-survey-result'
@@ -13,13 +13,9 @@ type SutTypes = {
   saveSurveyResultStub: SaveSurveyResult
 }
 
-const mockFakeRequest = (): HttpRequest => ({
-  params: {
-    surveyId: 'any_id'
-  },
-  body: {
-    answer: 'any_answer'
-  },
+const mockFakeRequest = (): SaveSurveyResultController.Request => ({
+  surveyId: 'any_id',
+  answer: 'any_answer',
   accountId: 'any_account_id'
 })
 
@@ -47,7 +43,7 @@ describe('SaveSurveyResult Controller', () => {
     const loadByIdSpy = jest.spyOn(loadSurveyByIdStub, 'loadById')
     const request = mockFakeRequest()
     await sut.handle(request)
-    expect(loadByIdSpy).toHaveBeenCalledWith(request.params.surveyId)
+    expect(loadByIdSpy).toHaveBeenCalledWith(request.surveyId)
   })
 
   it('Should return 403 if LoadSurveyById returns null', async () => {
@@ -67,12 +63,9 @@ describe('SaveSurveyResult Controller', () => {
   it('Should return 403 if an invalid answer is provided', async () => {
     const { sut } = makeSut()
     const res = await sut.handle({
-      params: {
-        surveyId: 'any_id'
-      },
-      body: {
-        answer: 'wrong_answer'
-      }
+      surveyId: 'any_id',
+      answer: 'wrong_answer',
+      accountId: 'any_account_id'
     })
     expect(res).toEqual(forbidden(new InvalidParamError('answer')))
   })
@@ -86,7 +79,7 @@ describe('SaveSurveyResult Controller', () => {
       surveyId: 'any_id',
       accountId: 'any_account_id',
       date: new Date(),
-      answer: request.body.answer
+      answer: request.answer
     })
   })
 
