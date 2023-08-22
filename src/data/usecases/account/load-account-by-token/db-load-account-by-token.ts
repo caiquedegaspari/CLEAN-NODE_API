@@ -1,4 +1,4 @@
-import { AccountModel, Decrypter, LoadAccountByToken, LoadAccountByTokenRepository } from './db-load-account-by-token-protocols'
+import { Decrypter, LoadAccountByToken, LoadAccountByTokenRepository } from './db-load-account-by-token-protocols'
 
 export class DbLoadAccountByToken implements LoadAccountByToken {
   constructor (
@@ -6,7 +6,7 @@ export class DbLoadAccountByToken implements LoadAccountByToken {
     private readonly loadAccountByTokenRepository: LoadAccountByTokenRepository
   ) {}
 
-  async load (token: string, role?: string | undefined): Promise<AccountModel | null> {
+  async load (token: string, role?: string | undefined): Promise<LoadAccountByToken.Result | null> {
     let accessToken: string
     try {
       accessToken = await this.decrypter.decrypt(token) as string

@@ -1,4 +1,4 @@
-import { AccountModel, AddAccount, mockFakeAccountModel } from '../controllers/auth/signup/signup-controller-protocols'
+import { AddAccount, mockFakeAccountModel } from '../controllers/auth/signup/signup-controller-protocols'
 import { Authentication } from '../controllers/auth/login/login-controller-protocols'
 import { LoadAccountByToken } from '../middlewares/auth-middleware-protocols'
 
@@ -22,7 +22,7 @@ export const mockAuthentication = (): Authentication => {
 
 export const mockLoadAccountByToken = (): LoadAccountByToken => {
   class LoadAccountByTokenStub implements LoadAccountByToken {
-    async load (token: string, role?: string | undefined): Promise<AccountModel | null> {
+    async load (token: string, role?: string | undefined): Promise<LoadAccountByToken.Result | null> {
       return await Promise.resolve(mockFakeAccountModel())
     }
   }
