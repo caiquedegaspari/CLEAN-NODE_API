@@ -2,6 +2,7 @@ import { LoadSurveyById } from '../controllers/survey-result/save-survey-result/
 import { LoadSurveys, SurveyModel } from '../controllers/survey/load-surveys/load-survey-controller-protocols'
 import { mockFakeSurveys, mockFakeSurvey } from '../middlewares/auth-middleware-protocols'
 import { AddSurvey } from '../controllers/survey/add-survey/add-survey-controller-protocols'
+import { CheckSurveyById } from '../controllers/survey-result/load-survey-result/load-survey-result-controller-protocols'
 
 export const mockAddSurvey = (): AddSurvey => {
   class AddSurveyStub implements AddSurvey {
@@ -28,4 +29,13 @@ export const mockLoadSurveyById = (): LoadSurveyById => {
     }
   }
   return new LoadSurveyByIdStub()
+}
+
+export const mockCheckSurveyById = (): CheckSurveyById => {
+  class CheckSurveyByIdStub implements CheckSurveyById {
+    async checkById (id: string): Promise<CheckSurveyById.Result> {
+      return await Promise.resolve(true)
+    }
+  }
+  return new CheckSurveyByIdStub()
 }
