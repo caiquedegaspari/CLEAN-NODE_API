@@ -1,7 +1,6 @@
 import { AccountModel, AddAccount, mockFakeAccountModel } from '../controllers/auth/signup/signup-controller-protocols'
-import { Authentication, AuthenticationParams } from '../controllers/auth/login/login-controller-protocols'
+import { Authentication } from '../controllers/auth/login/login-controller-protocols'
 import { LoadAccountByToken } from '../middlewares/auth-middleware-protocols'
-import { AuthenticationModel } from '@/domain/models/authentication'
 
 export const mockAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -14,7 +13,7 @@ export const mockAddAccount = (): AddAccount => {
 
 export const mockAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationParams): Promise<AuthenticationModel> {
+    async auth (authentication: Authentication.Params): Promise<Authentication.Result> {
       return await Promise.resolve({ accessToken: 'any_token', name: 'any name' })
     }
   }

@@ -1,5 +1,5 @@
 import { AccountModel } from '../models'
-import { AddAccount, AuthenticationParams } from '../usecases'
+import { AddAccount, Authentication } from '../usecases'
 
 export const mockFakeAccountModel = (): AccountModel => ({
   id: 'any_id',
@@ -14,7 +14,7 @@ export const mockFakeAccountParams = (): AddAccount.Params => ({
   password: 'any_password'
 })
 
-export const mockFakeAuthentication = (): AuthenticationParams => ({
+export const mockFakeAuthentication = (): Authentication.Params => ({
   email: 'any_email@mail.com',
   password: 'any_password'
 })
