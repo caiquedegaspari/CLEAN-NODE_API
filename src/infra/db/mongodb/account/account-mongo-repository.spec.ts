@@ -27,12 +27,8 @@ describe('Account Mongo repository', () => {
   describe('add()', () => {
     it('Should return an account on add success', async () => {
       const sut = makeSut()
-      const account = await sut.add(mockFakeAccountParams())
-      expect(account).toBeTruthy()
-      expect(account.id).toBeTruthy()
-      expect(account.name).toBe('any_name')
-      expect(account.email).toBe('any_email@mail.com')
-      expect(account.password).toBe('any_password')
+      const isValid = await sut.add(mockFakeAccountParams())
+      expect(isValid).toBe(true)
     })
   })
 
@@ -44,7 +40,6 @@ describe('Account Mongo repository', () => {
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
       expect(account?.name).toBe('any_name')
-      expect(account?.email).toBe('any_email@mail.com')
       expect(account?.password).toBe('any_password')
     })
 
