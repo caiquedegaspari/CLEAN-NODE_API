@@ -1,4 +1,5 @@
 import { AddAccountRepository } from '../protocols/db/account/add-account-repository'
+import { CheckAccountByEmailRepository } from '../protocols/db/account/check-account-by-email-repository'
 import { LoadAccountByTokenRepository } from '../protocols/db/account/load-account-by-token-repository'
 import { LoadAccountByEmailRepository, UpdateAccessTokenRepository } from '../usecases/account/authentication/db-authentication-protocols'
 
@@ -40,4 +41,13 @@ export const mockUpdateAccessTokenRepository = (): UpdateAccessTokenRepository =
     }
   }
   return new UpdateAccessTokenRepositoryStub()
+}
+
+export const mockCheckAccountByEmailRepository = (): CheckAccountByEmailRepository => {
+  class CheckAccountByEmailRepositoryStub implements CheckAccountByEmailRepository {
+    async checkByEmail (email: string): Promise<CheckAccountByEmailRepository.Result | null> {
+      return await Promise.resolve(true)
+    }
+  }
+  return new CheckAccountByEmailRepositoryStub()
 }
