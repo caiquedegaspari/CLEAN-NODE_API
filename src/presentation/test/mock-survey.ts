@@ -1,4 +1,4 @@
-import { LoadSurveyById } from '../controllers/survey-result/save-survey-result/save-survey-result-controller-protocols'
+import { LoadAnswersBySurvey } from '../controllers/survey-result/save-survey-result/save-survey-result-controller-protocols'
 import { LoadSurveys, SurveyModel } from '../controllers/survey/load-surveys/load-survey-controller-protocols'
 import { mockFakeSurveys, mockFakeSurvey } from '../middlewares/auth-middleware-protocols'
 import { AddSurvey } from '../controllers/survey/add-survey/add-survey-controller-protocols'
@@ -22,10 +22,10 @@ export const mockLoadSurveys = (): LoadSurveys => {
   return new LoadSurveysStub()
 }
 
-export const mockLoadSurveyById = (): LoadSurveyById => {
-  class LoadSurveyByIdStub implements LoadSurveyById {
-    async loadById (id: string): Promise<SurveyModel | null> {
-      return await Promise.resolve(mockFakeSurvey())
+export const mockLoadAnswersBySurvey = (): LoadAnswersBySurvey => {
+  class LoadSurveyByIdStub implements LoadAnswersBySurvey {
+    async loadAnswers (id: string): Promise<LoadAnswersBySurvey.Result | null> {
+      return await Promise.resolve([mockFakeSurvey().answers[0].answer, mockFakeSurvey().answers[1].answer])
     }
   }
   return new LoadSurveyByIdStub()

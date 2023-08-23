@@ -2,7 +2,7 @@ import { LoadSurveysRepository } from '@/data/protocols/db/survey/load-survey-re
 import { AddSurveyRepository } from '@/data/usecases/survey/add-survey/db-add-survey-protocols'
 import { MongoHelper, QueryBuilder } from '../helpers'
 import { SurveyModel } from '@/domain/models/survey'
-import { LoadSurveyByIdRepository } from '@/data/usecases/survey/load-survey-by-id/db-load-survey-by-id-protocols'
+import { LoadSurveyByIdRepository } from '@/data/protocols/db/survey/load-survey-by-id-repository'
 import { ObjectId } from 'mongodb'
 import { CheckSurveyByIdRepository } from '@/data/protocols/db/survey/check-survey-by-id-repository'
 
