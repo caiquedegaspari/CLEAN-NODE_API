@@ -111,6 +111,41 @@ describe('Survey Mongo repository', () => {
       expect(survey).toBeTruthy()
       expect(survey?.id).toBeTruthy()
     })
+
+    it('Should return null on load survey by id if survey dont exists', async () => {
+      const sut = makeSut()
+      const accountId = await mockAccountId()
+
+      const survey = await sut.loadById(accountId)
+      expect(survey).toBeFalsy()
+    })
+  })
+
+  describe('loadAnswers()', () => {
+    it('Should return survey answers by survey id on success', async () => {
+      const sut = makeSut()
+      const res = await surveyCollection.insertOne({
+        question: 'any_question',
+        answers: [
+          {
+            answer: 'any_answer',
+            image: 'any_image'
+          },
+          {
+            answer: 'other_answer'
+          }
+        ],
+        date: new Date()
+      })
+      const survey = await sut.loadAnswers(res.ops[0]._id)
+      expect(survey).toEqual(['any_answer', 'other_answer'])
+    })
+    it('Should return empty array[] if survey dont exists', async () => {
+      const accountId = await mockAccountId()
+      const sut = makeSut()
+      const result = await sut.loadAnswers(accountId)
+      expect(result).toEqual([])
+    })
   })
 
   describe('checkById()', () => {
