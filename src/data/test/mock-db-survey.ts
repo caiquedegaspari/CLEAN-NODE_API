@@ -1,6 +1,6 @@
 import { mockFakeSurvey, mockFakeSurveys } from '@/domain/test'
 import { AddSurveyRepository } from '../protocols/db/survey/add-survey-repository'
-import { LoadAnswersBySurveyRepository, LoadSurveyByIdRepository, SurveyModel } from '../usecases/survey/load-answers-by-survey/db-load-answers-by-survey-protocols'
+import { LoadAnswersBySurveyRepository, LoadSurveyByIdRepository } from '../usecases/survey/load-answers-by-survey/db-load-answers-by-survey-protocols'
 import { LoadSurveysRepository } from '../protocols/db/survey/load-survey-repository'
 import { CheckSurveyByIdRepository } from '../protocols/db/survey/check-survey-by-id-repository'
 
@@ -42,7 +42,7 @@ export const mockCheckSurveyByIdRepository = (): CheckSurveyByIdRepository => {
 
 export const mockLoadSurveysRepository = (): LoadSurveysRepository => {
   class LoadSurveysRepositoryStub implements LoadSurveysRepository {
-    async loadAll (accountId: string): Promise<SurveyModel[]> {
+    async loadAll (accountId: string): Promise<LoadSurveysRepository.Result> {
       return await Promise.resolve(mockFakeSurveys())
     }
   }
